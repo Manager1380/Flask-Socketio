@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block pagename %}Home{% endblock %}
+{% block content %}
+    <ul>
+        {% for link in links%}
+            <li style="list-style: none">
+                <h1>
+                    {{link[1]}} =><pre style="display: inline;">       </pre>
+                    <a href="{{link[0]}}">
+                        {{link[0]}}
+                    </a>
+                </h1>
+                <br>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

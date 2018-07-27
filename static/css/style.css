@@ -1,0 +1,82 @@
+body{
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+div.container-fluid{
+    background-color: gray;
+    height: 771px;
+    width: 100%;
+    margin: auto;
+}
+div.header{
+    background-color:rgb(255, 0, 255);
+}
+img{
+    border-radius: 5000px;
+    height: 50px;
+    width: 50px;
+    margin: 10px;
+    display: inline-block;
+}
+span.username{
+    color:yellow;
+}
+div.chat-body{
+    border: solid 5px white;
+    border-top: 0px;
+    border-right: 0px;
+    height: 630px;
+    overflow: auto;
+}
+div.online-users{
+    border: solid 5px white;
+    border-top: 0px;
+    height: 771px;
+    position: relative;
+    bottom: 71px;
+}
+div.input{
+    border: solid 5px white;
+    border-top: 0px;
+    height: 70px;
+    position: relative;
+    bottom: 141px;
+}
+input[type=text]{
+    background-color: yellow;
+    border: none;
+    height: 40px;
+    margin: 12px 0px;
+    width: 1000px;
+}
+input[type=submit]{
+    background-color: yellow;
+    border: none;
+    height: 40px;
+    margin: 12px 0px;
+}
+div.header-online{
+    background-color: cyan;
+    height: 70px;
+}
+div.user{
+    background-color: yellow;
+    margin: 10px 15px;
+    min-height: 70px;
+}
+div.row > div.mymessage{
+    background-color: springgreen;
+    height: 125px;
+    max-width: 600px;
+    min-width: 550px;
+    margin: 15px;
+    margin-left: auto;
+}
+div.yourmessage{
+    background-color: seagreen;
+    max-width: 600px;
+    min-width: 550px;
+    height: 125px;
+    margin: 15px;
+}

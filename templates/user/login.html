@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block pagename %}Login{% endblock %}
+{% block script %}
+    <script type="text/javascript" charset="utf-8">
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+        socket.on('connect', function() {
+            socket.emit('my event', {data: 'I\'m connected!'});
+        });
+    </script>
+{% endblock %}
+{% block content %}
+    <h1>Login Page</h1>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form action="http://localhost:5000/login" method="POST">
+        <input type="text" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+        <input type="submit" value="Login">
+    </form>
+{% endblock %}

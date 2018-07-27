@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block pagename %} Board {% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" charset="utf-8">
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        socket.on('connect', function() {
+            socket.emit('connection', {data: 'I\'m connected!'});
+        });
+        function send(){
+            var x = document.getElementById("message").value;
+            var y = "{{username}}"
+            socket.emit('message', {message : x,username : y})
+        }
+    </script>
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row header">
+            <div class="col-2">
+                <img src="{{ url_for('static', filename='img/download.png') }}" alt="{{username}}" title={{username}}>
+                <span class="username">{{username}}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-9 chat-body">
+                {% if data %}
+                    {% for message in data%}
+                        {% if message.user == username%}
+                            <div class="row">
+                                <div class="mymessage"> 
+                                     
+                                    {{message.user}} : 
+                                    {{message.text}}{{message.date}}
+                                </div>    
+                            </div>
+                        {% else %}
+                            <div class="row">
+                                <div class="yourmessage">
+                                    {{message.user}} : 
+                                    {{message.text}}{{message.date}}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif%}
+            </div>
+            <div class="col-3 online-users">
+                <div class="row header-online">Online Users List
+                    <a href="http://localhost:5000/logout" style="color :red">logout</a>
+                </div>
+                <div class="row body-online">
+                    {% if onlineUsers %}
+                        {% for user in onlineUsers%}
+                            <div class="user col-11">
+                                {{user.username}}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="row input">
+            <div class="col-9">
+                <form>
+                    <textarea id="message" placeholder="Send a message to the server..."></textarea>
+                    <button type="button" onclick="send(); return false;">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
